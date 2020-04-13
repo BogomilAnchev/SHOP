@@ -20,7 +20,8 @@ const MONGODB_URI =
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
-  collection: 'sessions'
+  collection: 'sessions',
+  useUnifiedTopology: true
 });
 const csrfProtection = csrf();
 
@@ -119,7 +120,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URI, {useNewUrlParser: true})
+  .connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(result => {
     app.listen(3000);
   })
